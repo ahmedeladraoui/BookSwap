@@ -149,6 +149,7 @@ function cardDiv(card) {
        ${card.offers_count > 0?
         card.offers.map(offer=>{
           
+          
           return `
         <div class="card-container w-full md:w-80 min-h-full bg-white ">
             <div class="h-48 bg-gray-100 relative">
