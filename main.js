@@ -26,6 +26,7 @@ function afficherLesLivres(data){
 }
 
 function afficherCategories(data){
+  document.querySelector('.categories').innerHTML = ''
     let categories = new Set()
     data.forEach(element => {
         categories.add(element.book.category.name)
@@ -88,7 +89,9 @@ function filterParType(data){
 
 
 document.getElementById("actualiser").addEventListener('click',event=>{
-  containerLivres.innerHTML = ''
+  containerLivres.innerHTML = `<div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-red"
+                role="status">
+            </div>`
   console.log(containerLivres)
   fetchData()
 })
@@ -149,7 +152,7 @@ function cardDiv(card) {
        ${card.offers_count > 0?
         card.offers.map(offer=>{
           
-          
+
           return `
         <div class="card-container w-full md:w-80 min-h-full bg-white ">
             <div class="h-48 bg-gray-100 relative">
