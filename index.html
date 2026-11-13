@@ -10,15 +10,12 @@
         integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
     
-    <!-- CSS العادي لي غيعوض الهوفر ديال Tailwind -->
     <style>
-        /* الحالة العادية: المربع الكحل كيكون هابط لتحت بـ 100% */
         .card-overlay {
             transform: translateY(100%);
             transition: transform 0.3s ease-in-out;
         }
 
-        /* ملي كدير هوفر على البطاقة: المربع الكحل كيرجع لبلاصتو 0 */
         .card-container:hover .card-overlay {
             transform: translateY(0);
         }
@@ -48,32 +45,30 @@
 
     <main class="flex gap-10 p-10">
 
-        <!-- الفلتر (البحث) -->
         <div class="w-80 rounded-xl bg-white p-4 shadow-lg border border-gray-100 h-fit">
             <div class="p-4 mb-2 border-b border-gray-200">
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">Rechercher</h2>
-                <input type="text" placeholder="Titre du livre" class="p-2 border rounded-lg w-full outline-none focus:border-blue-500">
+                <input type="text" placeholder="Titre du livre" id="searchLivre" class="p-2 border rounded-lg w-full outline-none focus:border-blue-500">
             </div>
             
             <div class="p-4 border-b border-gray-200">
                 <h2 class="text-lg font-semibold text-gray-800 mb-2">Type d'échange</h2>
-                <div class="flex flex-col gap-2">
-                    <label class="flex items-center gap-2"><input type="radio" name="typeEchange"> Tous</label>
-                    <label class="flex items-center gap-2"><input type="radio" name="typeEchange"> Définitif</label>
-                    <label class="flex items-center gap-2"><input type="radio" name="typeEchange"> Temporaire</label>
+                <div class="flex flex-col gap-2 typeEchange">
+                    <label class="flex items-center gap-2"><input type="radio" value="tous" name="typeEchange"> Tous</label>
+                    <label class="flex items-center gap-2"><input type="radio" value="definitif" name="typeEchange"> Définitif</label>
+                    <label class="flex items-center gap-2"><input type="radio" value="temporaire" name="typeEchange"> Temporaire</label>
                 </div>
             </div>
             
             <div class="p-4 border-b border-gray-200">
                 <h2 class="text-lg font-semibold text-gray-800 mb-2">Catégorie</h2>
-                <select class="border border-gray-300 rounded-lg w-full p-2 outline-none focus:border-blue-500">
+                <select class="categories border border-gray-300 rounded-lg w-full p-2 outline-none focus:border-blue-500">
                     <option value="">Toutes les catégories</option>
-                    <option value="1">Catégorie 1</option>
-                    <option value="2">Catégorie 2</option>
+                    
                 </select>
             </div>
 
-            <div class="p-4">
+            <div class="p-4" id="actualiser">
                 <button type="button" class="bg-blue-600 hover:bg-blue-700 w-full p-2 rounded-lg text-white font-medium transition">
                     <i class="fa-solid fa-arrows-rotate mr-2"></i> Actualiser
                 </button>
@@ -83,67 +78,14 @@
         
 
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <div class="card-container relative w-80 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transition-shadow hover:shadow-xl h-fit">
-            
-            <div class="h-48 bg-gray-100 relative">
-                <img src="book-4.svg" alt="Introduction to Algorithms" class="w-full h-full object-contain p-2" />
-                
-                <div class="absolute top-3 right-3 flex gap-2">
-                    <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full border border-green-200">Open</span>
-                    <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full border border-blue-200">Temporaire</span>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container">
+            <div
+                class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-red"
+                role="status">
                 </div>
-            </div>
-
-            <div class="p-5">
-                <h3 class="text-lg font-bold text-gray-900 truncate">Introduction to Algorithms</h3>
-                <p class="text-sm text-gray-500">Par Cormen et al.</p>
                 
-                <div class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-200">
-                    <img src="book-4.svg" alt="Salma Bennani" class="w-10 h-10 rounded-full object-cover border border-gray-300" />
-                    <div>
-                        <p class="text-sm font-semibold text-gray-800">Salma Bennani</p>
-                        <p class="text-xs text-gray-500">CyphX A</p>
-                    </div>
-                </div>
             </div>
-
-            <!-- حيدت كلاسات الهوفر ديال Tailwind وزدت 'card-overlay' -->
-            <div class="card-overlay absolute inset-0 bg-gray-900/95 text-white p-6 flex flex-col justify-center">
-                <h4 class="text-lg font-bold mb-4 border-b border-gray-700 pb-2">Détails de l'offre</h4>
-                
-                <div class="space-y-4 text-sm">
-                    <div class="flex justify-between items-center">
-                        <span class="text-gray-400">Durée:</span>
-                        <span class="font-medium text-blue-300">15 Nov - 15 Dec</span>
-                    </div>
-
-                    <div>
-                        <span class="text-gray-400 block mb-2">Catégorie:</span>
-                        <div class="flex gap-2">
-                            <span class="bg-gray-800 text-gray-200 px-2 py-1 rounded text-xs">JavaScript</span>
-                            <span class="bg-gray-800 text-gray-200 px-2 py-1 rounded text-xs">Laravel</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 pt-4 border-t border-gray-700">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-gray-400">Offres (2)</span>
-                            <span class="bg-green-500/20 text-green-400 text-xs px-2 py-1 rounded font-bold uppercase">Accepté</span>
-                        </div>
-                        
-                        <div class="bg-gray-800 p-3 rounded-lg flex items-start gap-3">
-                            <img src="book-4.svg" alt="Rayan Filali" class="w-8 h-8 rounded-full object-cover" />
-                            <div>
-                                <p class="text-xs text-gray-400"><span class="font-semibold text-white">Rayan</span> propose:</p>
-                                <p class="text-sm font-medium text-blue-300 mt-1">Grokking Algorithms</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         </div>
         
