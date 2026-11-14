@@ -20,7 +20,7 @@ Une interface web simple permettant de consulter des demandes d’échange de li
 
 ## Prérequis
 
-- Un navigateur web moderne.
+- Un navigateur web moderne. 
 - Le serveur API du projet doit être opérationnel à l’adresse `http://127.0.0.1:8000`.
 - L’API doit être accessible via la route `GET /api/v1/exchange-requests` et retourner les données dans la propriété `data` d'une réponse JSON.
 - Les requêtes CORS doivent être autorisées depuis l’origine du frontend si le serveur et l’interface fonctionnent sur des domaines ou des ports différents.
