@@ -38,12 +38,6 @@ Une interface web simple permettant de consulter des demandes d’échange de li
 
 2. Démarrer le serveur API sur `127.0.0.1:8000` et vérifier que la route `/api/v1/exchange-requests` est accessible.
 
-3. Lancer un serveur local pour les fichiers frontend depuis le dossier du projet, par exemple avec Python :
-
-   ```bash
-   python -m http.server 5500
-   ```
-
 4. Ouvrir [http://localhost:5500](http://localhost:5500) dans le navigateur.
 
 ## Structure du projet
