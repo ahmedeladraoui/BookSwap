@@ -99,7 +99,7 @@ document.getElementById("actualiser").addEventListener('click',event=>{
 
 function cardDiv(card) {
   return `
-                ${headerCard()}
+                ${cardHeader()}
                 ${bookImg(card)}
                 ${topCard(card)}
             </div>
@@ -109,19 +109,23 @@ function cardDiv(card) {
                     ${startEndDate(card)}
                     ${categoryTags(card)}
                     ${description(card)}
+                    </div>
+                    </div>
+                    </div>
                     ${checkOffers(card)}
-                </div>
-            </div>
-        </div>
-       ${card.offers_count > 0?
-        card.offers.map(offer=> exchange(offer)).join('') : `` }
+
+       ${card.offers_count > 0 && card.offers[0].status === 'accepted'?
+        exchange(card.offers) : `` }
+       
     </div>
-</div>`
+</div>
+  
+  `
 }
 
 
-function headerCard(){
-    return`<div class=" border border-gray-200 shadow-lg rounded-xl transition-shadow hover:shadow-2xl">
+function cardHeader(){
+    return `<div class=" border border-gray-200 shadow-lg rounded-xl transition-shadow hover:shadow-2xl">
     <div class="flex flex-col md:flex-row items-center justify-center gap-6">
         <div class="card-container w-full md:w-80 min-h-full bg-white">
             <div class="h-48 bg-gray-100 relative">`
@@ -131,7 +135,7 @@ function titleAuthor(card){
                 <p class="text-sm text-gray-500">${card.book.author}</p>`
 }
 function checkOffers(card){
-    return `${card.offers_count > 0?`<div class="flex items-center justify-center shrink-0">
+    return `${card.offers_count > 0 && card.offers[0].status === 'accepted'?`<div class="flex items-center justify-center shrink-0">
             <i class="fa-solid fa-arrow-right-arrow-left text-2xl text-blue-600"></i>
         </div>` : ''}`
 }
@@ -186,33 +190,33 @@ function exchange(offer){
     return `
         <div class="card-container w-full md:w-80 min-h-full bg-white ">
             <div class="h-48 bg-gray-100 relative">
-                <img src="book-4.svg" alt="${offer.offered_book.title}"
+                <img src="book-4.svg" alt="${offer[0].offered_book.title}"
                     class="w-full h-full object-contain p-2" />
 
                 <div class="absolute top-3 right-3 flex gap-2">
                     <span
-                        class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full border border-blue-200">${offer.status}</span>
+                        class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full border border-blue-200">${offer[0].status}</span>
                 </div>
             </div>
             <div class="p-5">
-                <h3 class="text-lg font-bold text-gray-900 truncate">${offer.offered_book.title}</h3>
-                <p class="text-sm text-gray-500">${offer.offered_book.author}</p>
+                <h3 class="text-lg font-bold text-gray-900 truncate">${offer[0].offered_book.title}</h3>
+                <p class="text-sm text-gray-500">${offer[0].offered_book.author}</p>
                 <div class="space-y-4 text-sm">
                     <h4 class="text-lg font-bold mb-4 border-b border-gray-700 pt-4">Détails de livre</h4>
                     <div>
                         <span class="text-gray-400 block mb-2">Catégorie & Tags:</span>
                         <div class="flex gap-2 flex-wrap">
                             <span
-                                class="bg-red-200 border border-red-700 text-red-600 px-2 py-1 rounded text-xs">${offer.offered_book.category.name}</span>
-                            ${offer.offered_book.tags.map(tag => `<span
+                                class="bg-red-200 border border-red-700 text-red-600 px-2 py-1 rounded text-xs">${offer[0].offered_book.category.name}</span>
+                            ${offer[0].offered_book.tags.map(tag => `<span
                                 class="bg-gray-800 text-gray-200 px-2 py-1 rounded text-xs">${tag}</span>`).join('')}
                         </div>
                     </div>
                     <span class="text-gray-400 block mb-2">message: </span>
-                    <p class="text-gray-400 block mb-2">${offer.message}</p>
+                    <p class="text-gray-400 block mb-2">${offer[0].message}</p>
 
                     <span class="text-gray-400 block mb-2">description: </span>
-                    <p class="text-gray-400 block mb-2">${offer.offered_book.description}</p>
+                    <p class="text-gray-400 block mb-2">${offer[0].offered_book.description}</p>
                 </div>
             </div>
         </div>`
